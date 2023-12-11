@@ -1,0 +1,29 @@
+# Title : "Text pre-processing using NLP operations like tokenization,stop-word removal,Lemmatization,Part-of-Speech Tagging "
+import spacy
+nlp = spacy.load("en_core_web_sm")
+ip_text = ("The Group of Twenty (G20) is the premier forum for international economic cooperation.")
+ab_doc = nlp(ip_text)
+print("\n Tokenization\n")
+for token in ab_doc:
+  print (token, token.idx)
+print("\n Stop Word Removal\n")
+spacy_stopwords = spacy.lang.en.stop_words.STOP_WORDS
+len(spacy_stopwords)
+print([token for token in ab_doc if not token.is_stop])
+print("\n Lemmatization\n")
+for token in ab_doc:
+    if str(token) != str(token.lemma_):
+        print(f"{str(token):>20} : {str(token.lemma_)}")
+print("\n Part-of-Speech\n")
+for token in ab_doc:
+    print(f"""
+            TOKEN: {str(token)}
+            =============================================================
+            TAG: {str(token.tag_):10} POS: {token.pos_}
+            EXPLANATION: {spacy.explain(token.tag_)}""")
+    
+
+# spaCy provides a variety of linguistic annotations to give you insights into a text's grammatical structure. This includes the word types, like the parts of speech, and how the words are related to each other.Why do we use spaCy?
+# Natural Language Processing With spaCy in Python – Real Python
+# spaCy is a free, open-source library for NLP in Python written in Cython. spaCy is designed to make it easy to build systems for information extraction or general-purpose natural language processing.
+#Stemming generates the base word from the inflected word by removing the affixes of the word.

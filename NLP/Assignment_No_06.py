@@ -6,6 +6,8 @@
     Practical : Implement and visualize Dependency Parsing of Textual Input using Stan- ford CoreNLP and Spacy library
 """
 import spacy
+from spacy import displacy
+
 nlp = spacy.load("en_core_web_sm")
 piano_text = "My school starts at 8:00.We always eat dinner together.They take the bus to work. He doesn't like vegetables."
 piano_doc = nlp(piano_text)
@@ -16,6 +18,7 @@ TOKEN: {token.text}
 {token.head.text = }
 {token.dep_ = }"""
     )
+displacy.serve(piano_doc, style="dep")
 #OUTPUT:
 """
 TOKEN: My
