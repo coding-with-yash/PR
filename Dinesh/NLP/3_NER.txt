@@ -1,0 +1,37 @@
+import spacy
+
+raw_text="""Tesla, founded by Elon Musk in 2003, is a leading electric car manufacturer based in Palo Alto, California. The company's innovative approach to sustainable transportation has gained global recognition. In 2020, Tesla unveiled the Cybertruck, a futuristic electric pickup truck that generated significant buzz.
+On January 1, 2021, Tesla announced record-breaking sales for the previous year. The company's revenue exceeded $30 billion, marking a milestone in its financial success. Elon Musk, the CEO of Tesla, is known for his ambitious goals, including the development of self-driving technology.In collaboration with NASA, SpaceX, another company founded by Elon Musk, achieved a major milestone by launching astronauts to the International Space Station on May 30, 2020. This historic event marked the first crewed orbital launch by a private company.
+The conference on artificial intelligence, held in Montreal in June 2022, attracted experts from various organizations, including Google, Microsoft, and IBM. The discussions focused on the ethical implications of AI and its impact on society.
+Overall, the advancements made by organizations like Tesla, SpaceX, Google, Microsoft, and IBM continue to shape the landscape of technology and innovation."""
+
+NER = spacy.load("en_core_web_sm", disable=["tok2vec", "tagger", "parser", "attribute_ruler", "lemmatizer"])
+text= NER(raw_text)
+for w in text.ents:
+    print(w.text,w.label_)
+
+
+spacy.displacy.render(text, style="ent",jupyter=True)
+spacy.explain(u"NORP")
+
+
+#Theory :-
+
+
+# NER stands for Named Entity Recognition, a crucial task in natural language processing (NLP). It involves identifying and classifying named entities (such as names of persons, organizations, locations, dates, numerical expressions, etc.) in text and categorizing them into predefined categories.
+
+# The primary goal of NER is to locate and classify named entities mentioned in unstructured text into categories such as:
+
+# Person: Names of people or characters.
+# Organization: Names of companies, institutions, etc.
+# Location: Names of places, cities, countries, etc.
+# Date: Temporal expressions like dates, months, years, etc.
+# Time: Specific time mentions.
+# Percent: Percentage expressions.
+# Money: Monetary expressions.
+# Miscellaneous: Anything that doesn't fall into the above categories.
+# For instance, in the sentence: "Apple Inc. is located in Cupertino, California, and was founded by Steve Jobs," NER would identify:
+
+# Organization: "Apple Inc."
+# Location: "Cupertino, California"
+# Person: "Steve Jobs"

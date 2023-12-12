@@ -1,0 +1,74 @@
+import gensim
+from gensim.utils import simple_preprocess
+from gensim import corpora
+
+# Sample documents
+documents = [
+    "The cat is black.",
+    "The dog is brown.",
+    "The cat and the dog are friends."
+]
+
+# Tokenize the documents
+tokenized_docs = [doc.lower().split() for doc in documents]
+
+# Create a dictionary mapping words to IDs
+dictionary = corpora.Dictionary(tokenized_docs)
+
+# Create the Bag of Words corpus
+bow_corpus = [dictionary.doc2bow(doc) for doc in tokenized_docs]
+
+# Display Bag of Words for each document
+for i, bow_doc in enumerate(bow_corpus):
+    print(f"Bag of Words representation for Document {i + 1}:")
+    print(bow_doc)
+    print()
+
+#output :
+# Bag of Words representation for Document 1:
+# [(0, 1), (1, 1), (2, 1), (3, 1)]
+
+# Bag of Words representation for Document 2:
+# [(2, 1), (3, 1), (4, 1), (5, 1)]
+
+# Bag of Words representation for Document 3:
+# [(1, 1), (3, 2), (5, 1), (6, 1), (7, 1), (8, 1)]
+
+
+
+#BoW using TFIDF
+from gensim import models
+
+# Create TF-IDF model based on the Bag of Words corpus
+tfidf = models.TfidfModel(bow_corpus)
+
+# Apply TF-IDF transformation to the Bag of Words corpus
+tfidf_corpus = tfidf[bow_corpus]
+
+# Display TF-IDF representation for each document
+for i, tfidf_doc in enumerate(tfidf_corpus):
+    print(f"TF-IDF representation for Document {i + 1}:")
+    print(tfidf_doc)
+    print()
+
+#Theory :-
+
+# The Bag of Words (BoW) is a simple and fundamental technique used in natural language processing for text analysis and feature extraction.
+
+#   Let's say we have three sentences:
+
+#   "The cat is black."
+#   "The dog is brown."
+#   "The cat and the dog are friends."
+
+#     Tokenization: First, we tokenize these sentences into individual words and normalize them (e.g., converting all words to lowercase). So, the unique words become our vocabulary.
+#     Vocabulary: ["the", "cat", "is", "black", "dog", "brown", "and", "are", "friends"]
+
+#     Counting Word Occurrences: For each sentence, we count the occurrences of words from our vocabulary.
+
+#     Sentence 1: [1, 1, 1, 1, 0, 0, 0, 0, 0]
+#     Sentence 2: [1, 0, 1, 0, 1, 1, 0, 0, 0]
+#     Sentence 3: [2, 1, 0, 0, 1, 0, 1, 1, 1]
+#     Each number in these representations corresponds to the count of occurrences of the respective word in the vocabulary within each sentence.
+
+#     The resulting vectors represent the Bag of Words for each sentence. This approach loses the sequence and context of the words but retains information about the presence and frequency of words in the text.

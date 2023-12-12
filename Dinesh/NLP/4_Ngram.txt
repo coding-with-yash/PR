@@ -1,0 +1,176 @@
+from nltk.util import ngrams
+
+#Function for generating n_grams
+def n_grams(n):
+  #sample input
+  para = '''Python is an open source community language, so numerous 
+            independent programmers are continually building libraries 
+            and functionality for it. Professionally, Python is great for 
+            backend web development, data analysis, artificial 
+            intelligence, and scientific computing. '''
+  grams = ngrams(para.split(), n)
+
+  for i in grams:
+    print(i)
+
+
+#input for each n-gram
+print("Unigrams:")
+n_grams(1)
+print("\nBigrams:")
+n_grams(2)
+print("\nTrigrams:")
+n_grams(3)
+
+#OUTPUT:
+# Unigrams:
+# ('Python',)
+# ('is',)
+# ('an',)
+# ('open',)
+# ('source',)
+# ('community',)
+# ('language,',)
+# ('so',)
+# ('numerous',)
+# ('independent',)
+# ('programmers',)
+# ('are',)
+# ('continually',)
+# ('building',)
+# ('libraries',)
+# ('and',)
+# ('functionality',)
+# ('for',)
+# ('it.',)
+# ('Professionally,',)
+# ('Python',)
+# ('is',)
+# ('great',)
+# ('for',)
+# ('backend',)
+# ('web',)
+# ('development,',)
+# ('data',)
+# ('analysis,',)
+# ('artificial',)
+# ('intelligence,',)
+# ('and',)
+# ('scientific',)
+# ('computing.',)
+
+# Bigrams:
+# ('Python', 'is')
+# ('is', 'an')
+# ('an', 'open')
+# ('open', 'source')
+# ('source', 'community')
+# ('community', 'language,')
+# ('language,', 'so')
+# ('so', 'numerous')
+# ('numerous', 'independent')
+# ('independent', 'programmers')
+# ('programmers', 'are')
+# ('are', 'continually')
+# ('continually', 'building')
+# ('building', 'libraries')
+# ('libraries', 'and')
+# ('and', 'functionality')
+# ('functionality', 'for')
+# ('for', 'it.')
+# ('it.', 'Professionally,')
+# ('Professionally,', 'Python')
+# ('Python', 'is')
+# ('is', 'great')
+# ('great', 'for')
+# ('for', 'backend')
+# ('backend', 'web')
+# ('web', 'development,')
+# ('development,', 'data')
+# ('data', 'analysis,')
+# ('analysis,', 'artificial')
+# ('artificial', 'intelligence,')
+# ('intelligence,', 'and')
+# ('and', 'scientific')
+# ('scientific', 'computing.')
+
+# Trigrams:
+# ('Python', 'is', 'an')
+# ('is', 'an', 'open')
+# ('an', 'open', 'source')
+# ('open', 'source', 'community')
+# ('source', 'community', 'language,')
+# ('community', 'language,', 'so')
+# ('language,', 'so', 'numerous')
+# ('so', 'numerous', 'independent')
+# ('numerous', 'independent', 'programmers')
+# ('independent', 'programmers', 'are')
+# ('programmers', 'are', 'continually')
+# ('are', 'continually', 'building')
+# ('continually', 'building', 'libraries')
+# ('building', 'libraries', 'and')
+# ('libraries', 'and', 'functionality')
+# ('and', 'functionality', 'for')
+# ('functionality', 'for', 'it.')
+# ('for', 'it.', 'Professionally,')
+# ('it.', 'Professionally,', 'Python')
+# ('Professionally,', 'Python', 'is')
+# ('Python', 'is', 'great')
+# ('is', 'great', 'for')
+# ('great', 'for', 'backend')
+# ('for', 'backend', 'web')
+# ('backend', 'web', 'development,')
+# ('web', 'development,', 'data')
+# ('development,', 'data', 'analysis,')
+# ('data', 'analysis,', 'artificial')
+# ('analysis,', 'artificial', 'intelligence,')
+# ('artificial', 'intelligence,', 'and')
+# ('intelligence,', 'and', 'scientific')
+# ('and', 'scientific', 'computing.')
+
+
+#Theory :-
+
+
+# Unigrams, Bigrams, and Trigrams are different types of n-grams used in natural language processing (NLP) to represent sequences of words from a text.
+
+# Unigrams:
+
+# Unigrams refer to single words in a given text. Each word in the text is considered as a separate entity.
+# For example, in the sentence "The cat is black," the unigrams would be ["The", "cat", "is", "black"].
+# Bigrams:
+
+# Bigrams are sequences of two adjacent words in the text.
+# For example, using the same sentence "The cat is black," the bigrams would be ["The cat", "cat is", "is black"].
+# Trigrams:
+
+# Trigrams are sequences of three adjacent words in the text.
+# For example, continuing with the sentence "The cat is black," the trigrams would be ["The cat is", "cat is black"].
+
+
+#using NLTK libraries
+
+from nltk import ngrams
+
+def n_g(n):
+  file = open("sample.txt")
+  for i in file.readlines():
+    cumulative = i
+    sentences = i.split(".")
+    counter = 0
+    for sentence in sentences:
+      print("For sentence", counter + 1, n, "grams are: ")
+      trigrams = ngrams(sentence.split(" "), n)
+      for grams in trigrams:
+        print(grams)
+      counter += 1
+      print()
+
+
+print("Unigrams:")
+n_g(1)
+print("\nBigrams:")
+n_g(2)
+print("\nTrigrams:")
+n_g(3)
+
